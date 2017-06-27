@@ -64,12 +64,14 @@ data_feature <- df %>% select(subject, activity, contains("mean", ignore.case = 
 
 # Descriptive activity names
 data <- data_feature %>% mutate(activity = activities[activity, "V2"])
+View(data)
 
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-summarise_data <- data %>% group_by(subject, activity) %>% summarise_each(funs(mean))
+data <- data %>% group_by(subject, activity) %>% summarise_each(funs(mean))
+View(data)
 
-# Write CSV in R
-write.csv(data, file = "tidydata.csv", row.names=FALSE)
+# Write the final tidy data as a txt file
+write.csv(data, file = "tidydata.txt", row.names=FALSE)
 write.csv(colnames(data), file = "features.csv")
 
 # At the end we reset the wording dir
